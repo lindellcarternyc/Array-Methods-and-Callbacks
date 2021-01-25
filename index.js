@@ -61,8 +61,15 @@ Use the higher-order function getWinners to do the following:
 3. Determines the winner (home or away) of each `finals` game. 
 4. Returns the names of all winning countries in an array called `winners` */ 
 
-function getWinners(/* code here */) {
-    /* code here */
+function getWinners(data, getFinalsCb) {
+    return getFinalsCb(data)
+        .map(match => {
+            if (match['Home Team Goals'] > match['Away Team Goals']) {
+                return match['Home Team Name']
+            } else {
+                return match['Away Team Name']
+            }
+        })
 }
 
 
@@ -77,8 +84,13 @@ Use the higher-order function getWinnersByYear to do the following:
 hint: the strings returned need to exactly match the string in step 4.
  */
 
-function getWinnersByYear(/* code here */) {
-    /* code here */
+function getWinnersByYear(array, getYearsCb, getWinnersCb) {
+    const years = getYearsCb(array)
+    const winners = getWinnersCb(array)
+   
+    return years.map((year, idx) => {
+        return `In ${year}, ${winners[idx]} won the world cup!`
+    })
 }
 
 
